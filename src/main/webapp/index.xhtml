@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="#{i18n.lang}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{i18n.title}</title>
+    </h:head>
+    <h:body>
+        <h1>#{i18n.title}</h1>
+
+        <h2>#{i18n.question}:
+            #{userNumberBean.minimum} ~ 
+            #{userNumberBean.maximum}</h2>
+
+        <h:form id="formulario">
+
+            <h:inputText
+                id="palpite" 
+                value="#{userNumberBean.guess}">
+                <f:validateLongRange 
+                    minimum="#{userNumberBean.minimum}"
+                    maximum="#{userNumberBean.maximum}" />
+            </h:inputText>
+
+            <h:commandButton
+                action="response"
+                value="#{i18n.send}" />
+
+            <p>
+                <h:message 
+                    showSummary="true" 
+                    showDetail="false"
+                    style="color: #d20005; font-family: 'New Century Schoolbook', serif; font-style: italic;"
+                    for="palpite"/>
+            </p>
+
+        </h:form>
+
+    </h:body>
+</html>
