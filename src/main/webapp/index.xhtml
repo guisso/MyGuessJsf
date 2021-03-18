@@ -1,18 +1,54 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="#{i18n.lang}"
+<!--<html lang="#{i18n.lang}"-->
+<html lang="#{userNumberBean.lang}"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>#{i18n.title}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="default" name="css/styles.css" />
     </h:head>
     <h:body>
+        <!--
+        * User-provided locale
+        * The position of this tag in the file does not interfere with its result
+        -->
+        <f:view locale="#{userNumberBean.lang}" />
+
         <h1>#{i18n.title}</h1>
 
         <h2>#{i18n.question}:
             #{userNumberBean.minimum} ~ 
             #{userNumberBean.maximum}</h2>
+
+        <!--Allows the user to set the page language-->
+        <h:form id="language">
+            <h:commandLink 
+                action="#{userNumberBean.defineLang('pt-BR')}">
+                <h:graphicImage
+                    styleClass="flagicon"
+                    library="default"
+                    name="img/pt_BR.png" />
+            </h:commandLink>
+            
+            <h:commandLink 
+                action="#{userNumberBean.defineLang('es')}">
+                <h:graphicImage
+                    styleClass="flagicon"
+                    library="default"
+                    name="img/es.png" />
+            </h:commandLink>
+            
+            <h:commandLink 
+                action="#{userNumberBean.defineLang('en')}">
+                <h:graphicImage
+                    styleClass="flagicon"
+                    library="default"
+                    name="img/en_US.png" />
+            </h:commandLink>
+        </h:form>
 
         <h:form id="formulario">
 
