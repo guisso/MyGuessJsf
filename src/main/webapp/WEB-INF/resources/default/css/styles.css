@@ -1,0 +1,13 @@
+/* 
+    Created on : Mar 18, 2021, 3:15:14 PM
+    Author     : Luis Guisso <luis.guisso at ifnmg.edu.br>
+*/
+
+form#language {
+    margin-bottom: .75em;
+}
+
+img.flagicon {
+    height: 1em;
+    margin: .1em;
+}
