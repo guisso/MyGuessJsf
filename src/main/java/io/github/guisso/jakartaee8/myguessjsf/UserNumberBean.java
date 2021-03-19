@@ -1,7 +1,10 @@
 package io.github.guisso.jakartaee8.myguessjsf;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
@@ -22,12 +25,15 @@ public class UserNumberBean implements Serializable {
     private final Integer minimum;
     private final Integer maximum;
     private Integer guess;
-    
+
     // Language specified by user
     private String lang;
 
+    // To disable guesses already done
+    private boolean[] disabled;
+
     public UserNumberBean() {
-        
+
         // Default language
         lang = "pt-BR";
 
@@ -36,6 +42,10 @@ public class UserNumberBean implements Serializable {
         random = (int) (Math.random()
                 * (maximum - minimum + 1))
                 + minimum;
+
+        // Default state for all guess buttons: false
+        disabled = new boolean[maximum - minimum + 1];
+
         System.out.println(">> Sorteado: " + random);
     }
 
@@ -57,6 +67,7 @@ public class UserNumberBean implements Serializable {
     }
 
     public void setGuess(Integer guess) {
+        disabled[guess - minimum] = true;
         this.guess = guess;
     }
 
@@ -66,6 +77,14 @@ public class UserNumberBean implements Serializable {
 
     public void setLang(String lang) {
         this.lang = lang;
+    }
+
+    public boolean[] getDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean[] disabled) {
+        this.disabled = disabled;
     }
     //</editor-fold>
 
@@ -96,6 +115,23 @@ public class UserNumberBean implements Serializable {
         // Null return refreshes the page
         // without navigation to another destination
         return null;
+    }
+
+    public String getPreviousView() {
+        // Expression Language: #{header['referer'])}
+        String referer = FacesContext.getCurrentInstance()
+                .getExternalContext().getRequestHeaderMap()
+                .get("referer");
+        int pos1 = referer.lastIndexOf('/');
+        int pos2 = referer.lastIndexOf(".xhtml");
+        return referer.substring(pos1, pos2);
+    }
+    
+    public List<Integer> getRange() {
+        return IntStream
+                .rangeClosed(minimum, maximum)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
 }
