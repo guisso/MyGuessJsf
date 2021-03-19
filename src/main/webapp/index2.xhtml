@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="#{userNumberBean.lang}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>#{i18n.title}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet 
+            library="default" 
+            name="css/styles.css" />
+    </h:head>
+    <h:body>
+        <f:view locale="#{userNumberBean.lang}" />
+
+        <ui:debug hotkey="k" />
+
+        <h1>#{i18n.title}</h1>
+
+        <h2>#{i18n.question}:
+            #{userNumberBean.minimum} ~ 
+            #{userNumberBean.maximum}</h2>
+
+        <!--Allows the user to set the page language-->
+        <h:form id="language">
+            <h:commandLink 
+                action="#{userNumberBean.defineLang('pt-BR')}">
+                <h:graphicImage
+                    styleClass="flagicon"
+                    library="default"
+                    name="img/pt_BR.png" />
+            </h:commandLink>
+
+            <h:commandLink 
+                action="#{userNumberBean.defineLang('es')}">
+                <h:graphicImage
+                    styleClass="flagicon"
+                    library="default"
+                    name="img/es.png" />
+            </h:commandLink>
+
+            <h:commandLink 
+                action="#{userNumberBean.defineLang('en')}">
+                <h:graphicImage
+                    styleClass="flagicon"
+                    library="default"
+                    name="img/en_US.png" />
+            </h:commandLink>
+        </h:form>
+
+        <h:form id="formulario">
+
+            <h:commandButton
+                styleClass="guess"
+                disabled="#{userNumberBean.disabled[0]}"
+                action="response"
+                value="1">
+                <f:setPropertyActionListener
+                    target="#{userNumberBean.guess}"
+                    value="1" />
+            </h:commandButton>
+
+            <h:commandButton
+                styleClass="guess"
+                disabled="#{userNumberBean.disabled[1]}"
+                action="response"
+                value="2">
+                <f:setPropertyActionListener
+                    target="#{userNumberBean.guess}"
+                    value="2" />
+            </h:commandButton>
+
+            <h:commandButton
+                styleClass="guess"
+                disabled="#{userNumberBean.disabled[2]}"
+                action="response"
+                value="3">
+                <f:setPropertyActionListener
+                    target="#{userNumberBean.guess}"
+                    value="3" />
+            </h:commandButton>
+
+            <h:commandButton
+                styleClass="guess"
+                disabled="#{userNumberBean.disabled[3]}"
+                action="response"
+                value="4">
+                <f:setPropertyActionListener
+                    target="#{userNumberBean.guess}"
+                    value="4" />
+            </h:commandButton>
+
+            <h:commandButton
+                styleClass="guess"
+                disabled="#{userNumberBean.disabled[4]}"
+                action="response"
+                value="5">
+                <f:setPropertyActionListener
+                    target="#{userNumberBean.guess}"
+                    value="5" />
+            </h:commandButton>
+
+            <h:commandButton
+                styleClass="guess"
+                disabled="#{userNumberBean.disabled[5]}"
+                action="response"
+                value="6">
+                <f:setPropertyActionListener
+                    target="#{userNumberBean.guess}"
+                    value="6" />
+            </h:commandButton>
+
+            <h:commandButton
+                styleClass="guess"
+                disabled="#{userNumberBean.disabled[6]}"
+                action="response"
+                value="7">
+                <f:setPropertyActionListener
+                    target="#{userNumberBean.guess}"
+                    value="7" />
+            </h:commandButton>
+
+            <h:commandButton
+                styleClass="guess"
+                disabled="#{userNumberBean.disabled[7]}"
+                action="response"
+                value="8">
+                <f:setPropertyActionListener
+                    target="#{userNumberBean.guess}"
+                    value="8" />
+            </h:commandButton>
+
+            <h:commandButton
+                styleClass="guess"
+                disabled="#{userNumberBean.disabled[8]}"
+                action="response"
+                value="9">
+                <f:setPropertyActionListener
+                    target="#{userNumberBean.guess}"
+                    value="9" />
+            </h:commandButton>
+
+            <h:commandButton
+                styleClass="guess"
+                disabled="#{userNumberBean.disabled[9]}"
+                action="response"
+                value="10">
+                <f:setPropertyActionListener
+                    target="#{userNumberBean.guess}"
+                    value="10" />
+            </h:commandButton>
+            
+            <hr/>
+
+            <ui:repeat
+                rendered="true"
+                value="#{userNumberBean.range}"
+                var="b">
+                <h:commandButton
+                    styleClass="guess"
+                    disabled="#{userNumberBean.disabled[b - userNumberBean.minimum]}"
+                    action="response"
+                    value="#{b}">
+                    <f:setPropertyActionListener
+                        target="#{userNumberBean.guess}"
+                        value="#{b}" />
+                </h:commandButton>
+            </ui:repeat>
+
+        </h:form>
+
+    </h:body>
+</html>
