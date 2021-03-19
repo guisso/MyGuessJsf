@@ -11,3 +11,7 @@ img.flagicon {
     height: 1em;
     margin: .1em;
 }
+
+input[type=submit].guess {
+    width: 3em;
+}
