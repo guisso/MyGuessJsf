@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="#{userNumberBean.lang}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <!--<title># {i18n.title.crash} Não funciona...</title>-->
+        <title>#{"i18n.title.crash"}</title>
+    </h:head>
+    <h:body>
+        <h1>#{i18n['title.crash']}</h1>
+        
+        <h:form>
+            <h:commandButton
+                action="#{willCrashBean
+                          .throwARandomException()}"
+                value="#{i18n.halt}"/>
+        </h:form>
+
+        <h:form>
+            <h:commandButton
+                action="#{willCrashBean
+                          .goToNonExistentPage()}"
+                value="#{i18n.pagenonexistent}"/>
+        </h:form>
+        
+        <h:form>
+            <h:commandButton
+                action="#{willCrashBean
+                          .throwServerError()}"
+                value="#{i18n.throwservererror}"/>
+        </h:form>
+
+        <p><a href="nonexistentpage.xhtml">
+                Página inexistente</a></p>
+
+        <!--O link abaixo não é gerado porque o JSF processa o componente e identifica antecipadamente que o recurso não existe-->
+        <!--        <h:link
+                    outcome="/nonexistentpage"
+                    value="The page doesn't exist"/>-->
+    </h:body>
+</html>
+
